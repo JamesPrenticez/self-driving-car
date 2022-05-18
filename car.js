@@ -67,21 +67,18 @@ class Car{
     }
 
     if(!this.controls.handbreak){
-      this.friction = 0.125
+      this.friction = 0.10
       this.acceleration = 0.25
     }
     
     if(this.controls.handbreak){
-      // if(this.speed <= 0) return
-      // this.speed -= 0.04
-      // this.acceleration = 0.1
       this.x += (Math.sin(this.angle) * (this.speed * 0.5))
       this.y += (Math.cos(this.angle) * (this.speed * 0.5))
-      this.friction = 0.0625 //90 degree
-      //this.friction = 0.03125 //180 degree
+      this.friction = 0.03 //180 degree
+      if(skidMarks.length > 500) this.acceleration = 0.15, this.friction = 0.06 //90 degree
+      if(skidMarks.length > 1000) this.acceleration = 0.05, this.friction = 0.10
       if(skidMarks.length > 1500) this.acceleration = 0
     } 
-
 
     this.x -= Math.sin(this.angle) * this.speed
     this.y -= Math.cos(this.angle) * this.speed
@@ -122,6 +119,7 @@ class Car{
   drawCar(ctx){
     
     ctx.save()
+    ctx.fillStyle = "black"
     ctx.translate(this.x, this.y)
     ctx.rotate(-this.angle)
 
