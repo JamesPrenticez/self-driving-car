@@ -4,6 +4,7 @@ class Controls{
     this.left = false
     this.reverse = false
     this.right = false
+    this.handbreak = false
 
     this.#addKeyboardListeners() //# = private 
   }
@@ -23,6 +24,9 @@ class Controls{
         case "d":
           this.right = true
           break
+        case " ":
+          this.handbreak = true
+          break
       }
       //console.table(this)
     }
@@ -39,6 +43,9 @@ class Controls{
           break
         case "d":
           this.right = false
+          break
+        case " ":
+          this.handbreak = false
           break
       }
       //console.table(this)

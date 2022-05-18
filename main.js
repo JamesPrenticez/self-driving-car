@@ -4,16 +4,17 @@ canvas.width = 600
 
 const ctx = canvas.getContext("2d")
 
-const car = new Car(100, 100, 30, 50)
+const car = new Car(300, 400, 30, 50)
 
-car.draw(ctx)
-
+car.drawCar(ctx)
 animate()
 
 function animate(){
   car.update()
-
+  
   canvas.height = window.innerHeight;
-  car.draw(ctx)
+  car.drawSkid(ctx)
+  car.drawCar(ctx)
+  
   requestAnimationFrame(animate)
 }
