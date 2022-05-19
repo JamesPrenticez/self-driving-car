@@ -14,11 +14,13 @@ class Car{
     this.friction = 0.125 //half acceleration
     this.angle = 0
 
+    this.sensor = new Sensor(this)
     this.controls = new Controls()
   }
 
   update(){
     this.#move()
+    this.sensor.update()
   }
 
 
@@ -117,6 +119,7 @@ class Car{
       
 
   drawCar(ctx){
+    this.sensor.draw(ctx)
     
     ctx.save()
     ctx.fillStyle = "black"
@@ -133,6 +136,7 @@ class Car{
     ctx.fill()
 
     ctx.restore()
+
   }
 
 }
