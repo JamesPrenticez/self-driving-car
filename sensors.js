@@ -83,7 +83,7 @@ class Sensor{
       ctx.stroke()
       ctx.beginPath()
       ctx.lineWidth = 2
-      ctx.strokeStyle = "red" 
+      ctx.strokeStyle = "orange" 
       ctx.moveTo(
         this.rays[i][1].x,
         this.rays[i][1].y
