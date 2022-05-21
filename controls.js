@@ -1,19 +1,26 @@
 class Controls{
-  constructor(){
-    this.foward = false
+  constructor(type){
+    this.forward = false
     this.left = false
     this.reverse = false
     this.right = false
     this.handbreak = false
 
-    this.#addKeyboardListeners() //# = private 
+    switch(type){
+      case "KEYS":
+        this.#addKeyboardListeners()
+        break
+      case "DUMMY":
+        this.forward = true
+        break
+    }
   }
 
   #addKeyboardListeners(){
     document.onkeydown = (e) => {
       switch(e.key){
         case "w":
-          this.foward = true
+          this.forward = true
           break
         case "a":
           this.left = true
@@ -33,7 +40,7 @@ class Controls{
     document.onkeyup = (e) => {
       switch(e.key){
         case "w":
-          this.foward = false
+          this.forward = false
           break
         case "a":
           this.left = false
