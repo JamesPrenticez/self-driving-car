@@ -102,7 +102,7 @@ w
       ctx.stroke()
       ctx.beginPath()
       ctx.lineWidth = 2
-      ctx.strokeStyle = "orange" 
+      ctx.strokeStyle = "red" 
       ctx.moveTo(
         this.rays[i][1].x,
         this.rays[i][1].y

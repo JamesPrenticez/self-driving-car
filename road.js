@@ -1,5 +1,5 @@
 class Road{
-  constructor(x, width, laneCount=6){
+  constructor(x, width, laneCount=3){
     this.x = x
     this.width = width
     this.laneCount = laneCount
@@ -47,8 +47,8 @@ class Road{
       ctx.stroke()
 
       ctx.font = "48px serif"
-      ctx.fillStyle = "blue"
-      ctx.fillText(`${i + 1}`, this.getLaneCenter(i)-10, 50)
+      ctx.fillStyle = "white"
+      ctx.fillText(`${i + 1}`, this.getLaneCenter(i)-10, -500)
 
     }
 
@@ -60,7 +60,7 @@ class Road{
       ctx.lineTo(border[1].x, border[1].y)
       ctx.stroke()
 
-      ctx.fillText("1", this.getLaneCenter(0)-10, 50)
+      ctx.fillText("1", this.getLaneCenter(0)-10, -500)
     })
 
   }

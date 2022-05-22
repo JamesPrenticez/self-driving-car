@@ -201,8 +201,8 @@ class Car{
     ctx.stroke()
   }
       
-  drawCar(ctx){
-    if(this.sensor){
+  drawCar(ctx, drawSensor = false){
+    if(this.sensor && drawSensor){
       this.sensor.draw(ctx)
     }
 
