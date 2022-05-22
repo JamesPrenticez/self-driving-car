@@ -5,9 +5,9 @@ canvas.width = 600
 const ctx = canvas.getContext("2d")
 
 const road = new Road(canvas.width/2, canvas.width * 0.9)
-const car = new Car(road.getLaneCenter(2), 400, 30, 50, "KEYS")
+const car = new Car(road.getLaneCenter(2), 400, 42, 103, "KEYS", 3, "blue")
 const traffic = [
-  new Car(road.getLaneCenter(2), 100, 30, 50, "DUMMY", 2),
+  new Car(road.getLaneCenter(2), 100, 42, 103, "DUMMY", 2, getRandomColor()),
 ]
 
 animate()
@@ -26,12 +26,19 @@ function animate(){
   ctx.save()
   ctx.translate(0, -car.y + canvas.height * 0.7)
   
+  //road
   road.draw(ctx)
-  for(let i = 0; i < traffic.length; i++){
-    traffic[i].drawCar(ctx, "blue")
-  }
+
+  //skidz
   car.drawSkid(ctx)
-  car.drawCar(ctx, "black")
+
+  //traffic
+  for(let i = 0; i < traffic.length; i++){
+    traffic[i].drawCar(ctx)
+  }
+
+  //player car
+  car.drawCar(ctx)
   
   ctx.restore()
   
