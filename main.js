@@ -1,18 +1,21 @@
-const canvas = document.getElementById("myCanvas")
+const carCanvas = document.getElementById("carCanvas")
+carCanvas.width = 600
 
-canvas.width = 600
+const networkCanvas = document.getElementById("networkCanvas")
+networkCanvas.width = 600
 
-const ctx = canvas.getContext("2d")
+const carCtx = carCanvas.getContext("2d")
+const networkCtx = networkCanvas.getContext("2d")
 
-const road = new Road(canvas.width/2, canvas.width * 0.9)
-const car = new Car(road.getLaneCenter(2), 400, 42, 103, "KEYS", 3, "blue")
+const road = new Road(carCanvas.width/2, carCanvas.width * 0.9)
+const car = new Car(road.getLaneCenter(2), 400, 42, 103, "AI", 3, "hsl(208, 100%, 51%)") //"KEYS"
 const traffic = [
   new Car(road.getLaneCenter(2), 100, 42, 103, "DUMMY", 2, getRandomColor()),
 ]
 
 animate()
 
-function animate(){
+function animate(time){
 
   for(let i = 0; i < traffic.length; i++){
     traffic[i].update(road.borders, [])
@@ -20,27 +23,31 @@ function animate(){
   
   car.update(road.borders, traffic)
   
-  canvas.height = window.innerHeight;
+  carCanvas.height = window.innerHeight;
+  networkCanvas.height = window.innerHeight;
   
   //camera movement
-  ctx.save()
-  ctx.translate(0, -car.y + canvas.height * 0.7)
+  carCtx.save()
+  carCtx.translate(0, -car.y + carCanvas.height * 0.7)
   
   //road
-  road.draw(ctx)
+  road.draw(carCtx)
 
   //skidz
-  car.drawSkid(ctx)
+  car.drawSkid(carCtx)
 
   //traffic
   for(let i = 0; i < traffic.length; i++){
-    traffic[i].drawCar(ctx)
+    traffic[i].drawCar(carCtx)
   }
 
   //player car
-  car.drawCar(ctx)
+  car.drawCar(carCtx)
   
-  ctx.restore()
+  carCtx.restore()
+
+  networkCtx.lineDashOffset = -time / 50
+  Visualizer.drawNetwork(networkCtx, car.brain)
   
   requestAnimationFrame(animate)
 }
