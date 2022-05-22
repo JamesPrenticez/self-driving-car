@@ -11,12 +11,37 @@ const road = new Road(carCanvas.width/2, carCanvas.width * 0.9)
 
 let N = 100
 const cars = generateCars(N)
+let bestCar = cars[0]
+
+if(localStorage.getItem("bestBrain")){
+  for(i = 0; i < cars.length; i++){
+    cars[i].brain = JSON.parse(
+      localStorage.getItem("bestBrain")
+    )
+    if(i != 0){
+      NeuralNetwork.mutate(cars[i].brain, 0.2)
+    }
+  }
+}
 
 const traffic = [
   new Car(road.getLaneCenter(1), -400, 42, 103, "DUMMY", 2, getRandomColor()),
+  new Car(road.getLaneCenter(0), -800, 42, 103, "DUMMY", 2, getRandomColor()),
+  new Car(road.getLaneCenter(2), -800, 42, 103, "DUMMY", 2, getRandomColor()),
 ]
 
 animate()
+
+function save(){
+  localStorage.setItem("bestBrain",
+    JSON.stringify(bestCar.brain)
+  )
+  document.getElementById("confirmation").innerHTML = "saved" //JSON.stringify(bestCar.brain)
+}
+
+function discard(){
+  localStorage.removeItem("bestBrain")
+}
 
 function generateCars(N){
   const cars = []
@@ -35,7 +60,7 @@ function animate(time){
     cars[i].update(road.borders, traffic)
   }
   
-  const bestCar = cars.find(
+  bestCar = cars.find(
     c => c.y == Math.min(
       ...cars.map(c => c.y)
     )
