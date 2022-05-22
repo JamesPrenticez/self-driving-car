@@ -28,6 +28,10 @@ const traffic = [
   new Car(road.getLaneCenter(1), -400, 42, 103, "DUMMY", 2, getRandomColor()),
   new Car(road.getLaneCenter(0), -800, 42, 103, "DUMMY", 2, getRandomColor()),
   new Car(road.getLaneCenter(2), -800, 42, 103, "DUMMY", 2, getRandomColor()),
+  new Car(road.getLaneCenter(2), -800, 42, 103, "DUMMY", 2, getRandomColor()),
+  new Car(road.getLaneCenter(0), -1200, 42, 103, "DUMMY", 2, getRandomColor()),
+  new Car(road.getLaneCenter(1), -1200, 42, 103, "DUMMY", 2, getRandomColor()),
+  new Car(road.getLaneCenter(2), -1600, 42, 103, "DUMMY", 2, getRandomColor()),
 ]
 
 animate()
